@@ -2,7 +2,7 @@ const {ObjectId} = require("mongodb");
 
 class ContactService{
     constructor(client){
-        this.contact = client.db().colection("contacts");
+        this.contact = client.db().collection("contacts");
     }
 
     extractConactData(payload){
@@ -27,6 +27,8 @@ class ContactService{
             {$set: {favorite: contact.favorite === true}},
             {returnDocument: "after", upsert: true}
         );
+
+        return result.value;
     }
 
     async find(filter){

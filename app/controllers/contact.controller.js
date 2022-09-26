@@ -1,34 +1,8 @@
-// exports.create = (req, res) => {
-//     res.send({ message: "create handler"});
-// };
 
 const ApiError = require("../api-error");
 const ContactService = require("../services/contact.service");
 const MongoDB = require("../utils/mongodb.util");
 
-// exports.findAll = (req, res) =>{
-//     res.send({message: "findAll handler"});
-// };
-
-// exports.findOne = (req, res) =>{
-//     res.send({message: "findOne handler"});
-// };
-
-// exports.update = (req, res) =>{
-//     res.send({message: "update handler"});
-// };
-
-// exports.delete = (req, res) =>{
-//     res.send({message: "delete handler"});
-// };
-
-// exports.deleteAll = (req, res) =>{
-//     res.send({message: "deleteAll handler"});
-// };
-
-// exports.findAllFavorite = (req, res) =>{
-//     res.send({message: "findAllFavorite handler"});
-// };
 exports.create = async (req, res, next) => {
     if (!req.body?.name){
         return next(new ApiError(400,"Mame can not be empty"));
@@ -76,7 +50,7 @@ exports.findOne = async ( req, res, next) => {
         return next(
             new ApiError(
                 500,
-                'Error retrieving contact with id=${req.params.id}'
+                `Error retrieving contact with id=${req.params.id}`
             )
         );
     }
@@ -95,7 +69,7 @@ exports.update = async ( req, res, next) => {
         return  res.send({ message: "Contact was updated successfully"});
     } catch (error){
         return next(
-            new ApiError(500, 'Error updating contact with id=${req.params.id}')
+            new ApiError(500, `Error updating contact with id=${req.params.id}`)
         );
     }
 }
@@ -113,7 +87,7 @@ exports.delete = async( req, res, next) =>{
         return next(
             new ApiError(
                 500,
-                'Could not delete contact with id=${req.params.id}'
+                `Could not delete contact with id=${req.params.id}`
             )
         );
     }
@@ -139,7 +113,7 @@ exports.deleteAll = async (_req, res, next) => {
         const contactService = new ContactService(MongoDB.client);
         const deleteConut = await contactService.deleteAll();
         return res.send({
-            message: '${deleteCount} contacts were deleted successfully'
+            message: `${deleteCount} contacts were deleted successfully`
         });
     } catch( error){
         return next(

@@ -4,7 +4,7 @@ const config = {
     },
 
     db: {
-        uri: process.env.MOGODB_URI || "mongo://127.0.0.1:27017/contactbook"
+        uri: process.env.MOGODB_URI || "mongodb://127.0.0.1:27017/contactbook"
     }
 };
 
